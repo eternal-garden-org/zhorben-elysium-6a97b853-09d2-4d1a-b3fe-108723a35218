@@ -1,7 +1,9 @@
 import { format, differenceInYears } from "date-fns";
 import { ru } from "date-fns/locale";
 import { MapPin } from "lucide-react";
-import { MemorialPhoto } from "@/components/memorial-photo";
+import { Typography } from "@/components/ui/typography";
+import Image from "next/image";
+import { Container } from "@/components/container";
 import { cn } from "@/lib/utils";
 
 interface MemorialHeaderProps {
@@ -35,83 +37,116 @@ export function MemorialHeader({
 
   return (
     <div
-      className={cn(
-        "flex flex-col items-center text-center space-y-8",
-        "py-16",
-        className,
-      )}
+      className={cn("relative w-full", className)}
+      style={{
+        backgroundImage: `url('http://127.0.0.1:54331/storage/v1/object/public/memorial-media/memorials/6a97b853-09d2-4d1a-b3fe-108723a35218/photo/1757474627837_bg_image_3.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
     >
-      <MemorialPhoto src={photoUrl} alt={`Фото ${fullName}`} />
-
-      <div className="space-y-2 w-full">
-        <h1 className="font-semibold" style={{ fontSize: "48px" }}>
-          {fullName}
-        </h1>
-
-        <div className="flex justify-center items-baseline">
-          <div className="inline-flex items-baseline">
-            <span style={{ fontSize: "20px" }}>{birthDayMonth} </span>
-            <span style={{ fontSize: "36px", marginLeft: "4px" }}>
-              {birthYear}
-            </span>
+      <Container>
+        <div className="flex flex-col lg:flex-row items-start py-16 gap-8">
+          {/* Photo on the left */}
+          <div className="flex-shrink-0">
+            <div className="relative w-[480px] h-[480px]">
+              <Image
+                src={photoUrl}
+                alt={`Фото ${fullName}`}
+                fill
+                sizes="480px"
+                className="object-cover rounded-lg"
+                priority
+              />
+            </div>
           </div>
 
-          <span className="mx-4" style={{ fontSize: "36px" }}>
-            —
-          </span>
+          {/* Text content on the right */}
+          <div className="flex-1 flex flex-col justify-between h-[480px]">
+            <div>
+              {/* Full name */}
+              <Typography.H1 
+                className="text-white font-bold text-left mb-0"
+                style={{ fontSize: "40px", lineHeight: "1.2" }}
+              >
+                {fullName}
+              </Typography.H1>
 
-          <div className="inline-flex items-baseline">
-            <span style={{ fontSize: "20px" }}>{deathDayMonth} </span>
-            <span style={{ fontSize: "36px", marginLeft: "4px" }}>
-              {deathYear}
-            </span>
+              {/* Age badge */}
+              <div 
+                className="inline-block mt-10 px-4 py-2 text-black font-light"
+                style={{ 
+                  backgroundColor: "#F6B95A", 
+                  borderRadius: "999px",
+                  fontSize: "16px"
+                }}
+              >
+                {age} лет жизни
+              </div>
+
+              {/* Birth and death dates */}
+              <div className="mt-5 text-left">
+                <span className="text-[#8B8B8B] font-light">
+                  {birthDayMonth} 
+                </span>
+                <span className="text-white font-bold ml-1" style={{ fontSize: "20px" }}>
+                  {birthYear}
+                </span>
+                <span className="text-white font-bold mx-3" style={{ fontSize: "20px" }}>
+                  –
+                </span>
+                <span className="text-white font-bold" style={{ fontSize: "20px" }}>
+                  {deathYear}
+                </span>
+                <span className="text-[#8B8B8B] font-light ml-1">
+                  {deathDayMonth}
+                </span>
+              </div>
+            </div>
+
+            {/* Location blocks at the bottom */}
+            <div className="space-y-4">
+              {/* Birth place */}
+              <div>
+                <div className="flex items-center mb-1">
+                  <MapPin size={16} className="text-[#8B8B8B] mr-2" />
+                  <Typography.P 
+                    className="text-[#8B8B8B] m-0"
+                    style={{ fontSize: "14px" }}
+                  >
+                    Место рождения
+                  </Typography.P>
+                </div>
+                <Typography.P 
+                  className="text-white font-bold m-0"
+                  style={{ fontSize: "20px" }}
+                >
+                  {birthPlace}
+                </Typography.P>
+              </div>
+
+              {/* Death place */}
+              <div>
+                <div className="flex items-center mb-1">
+                  <MapPin size={16} className="text-[#8B8B8B] mr-2" />
+                  <Typography.P 
+                    className="text-[#8B8B8B] m-0"
+                    style={{ fontSize: "14px" }}
+                  >
+                    Место смерти
+                  </Typography.P>
+                </div>
+                <Typography.P 
+                  className="text-white font-bold m-0"
+                  style={{ fontSize: "20px" }}
+                >
+                  {deathPlace}
+                </Typography.P>
+              </div>
+            </div>
           </div>
         </div>
-
-        <p className="text-muted-foreground text-lg">{age} лет жизни</p>
-      </div>
-
-      <div className="flex flex-col md:flex-row gap-4 mt-6 w-full mx-auto">
-        <div
-          className={cn(
-            "flex flex-col flex-1 items-center",
-            "rounded-lg p-4 backdrop-blur-sm",
-            "border border-[#92C0C233]",
-            "space-y-1",
-          )}
-        >
-          <div className="text-base flex items-center text-muted-foreground w-full">
-            <MapPin
-              size={12}
-              className="text-muted-foreground mr-2 flex-shrink-0"
-            />
-            Место рождения
-          </div>
-          <div className="text-2xl font-medium w-full text-left">
-            {birthPlace}
-          </div>
-        </div>
-
-        <div
-          className={cn(
-            "flex flex-col flex-1 items-center",
-            "rounded-lg p-4 backdrop-blur-sm",
-            "border border-[#92C0C233]",
-            "space-y-1",
-          )}
-        >
-          <div className="text-base flex items-center text-muted-foreground w-full">
-            <MapPin
-              size={12}
-              className="text-muted-foreground mr-2 flex-shrink-0"
-            />
-            Место смерти
-          </div>
-          <div className="text-2xl font-medium w-full text-left">
-            {deathPlace}
-          </div>
-        </div>
-      </div>
+      </Container>
     </div>
   );
 }
