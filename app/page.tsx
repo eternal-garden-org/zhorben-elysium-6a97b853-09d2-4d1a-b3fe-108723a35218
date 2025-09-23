@@ -3,6 +3,7 @@ import { Container } from "@/components/container";
 import { MemorialHeader } from "@/components/memorial-header";
 import { MemorialInfo } from "@/components/memorial-info";
 import { MemorialBio } from "@/components/memorial-bio";
+import { MemorialGallery } from "@/components/memorial-gallery";
 import { MemorialQuotes } from "@/components/memorial-quotes";
 import { MemorialMedia } from "@/components/memorial-media";
 import { MemorialPhotos } from "@/components/memorial-photos";
@@ -24,6 +25,7 @@ export default function Home() {
       <Container>
         <MemorialInfo />
         <MemorialBio />
+        <MemorialGallery />
       </Container>
       <MemorialQuotes />
       <Container>

@@ -1,3 +1,13 @@
+"use client";
+
+import { ChevronDown } from "lucide-react";
+import { Typography } from "@/components/ui/typography";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 
 interface MemorialBioProps {
@@ -7,47 +17,67 @@ interface MemorialBioProps {
 export function MemorialBio({ className }: MemorialBioProps) {
   return (
     <div className={cn("w-full py-16", className)}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-3">
-          <h2 className="text-4xl font-medium">Семья</h2>
-          <p className="text-base text-muted-foreground">
-            FIRST_NAME прожил счастливую жизнь с женой Ольгой Сергеевной. Вместе
-            они воспитали двоих замечательных детей — Виктора и Елену. Виктор
-            пошёл по стопам отца, став инженером, а Елена выбрала медицину и
-            стала врачом. У FIRST_NAMEа было трое внуков, которых он обожал:
-            Максим, Полина и София. Он всегда говорил, что внуки — это главный
-            подарок жизни.
-          </p>
-        </div>
+      <Accordion type="single" collapsible className="w-full space-y-5">
+        <AccordionItem 
+          value="biography" 
+          className={cn(
+            "border border-[#2D2D2D] rounded-lg px-6 py-4",
+            "data-[state=open]:border-white transition-colors duration-200"
+          )}
+        >
+          <AccordionTrigger className="hover:no-underline">
+            <Typography.H3 className="text-[20px] font-bold text-white text-left">
+              Биография
+            </Typography.H3>
+            <ChevronDown className="h-5 w-5 shrink-0 text-[#8B8B8B] transition-transform duration-200 [&[data-state=open]]:rotate-180" />
+          </AccordionTrigger>
+          <AccordionContent className="pt-4">
+            <Typography.P className="text-[16px] text-[#8B8B8B] leading-relaxed mt-0">
+              Александр Викторович Карпук родился в Бресте. С ранних лет он проявлял интерес к науке и искусству. После окончания школы Александр поступил в университет, где изучал инженерное дело. В своей карьере он достиг значительных успехов, работая над различными проектами в области технологий. В свободное время Александр увлекается фотографией и путешествиями, что позволяет ему открывать новые горизонты и вдохновляться окружающим миром.
+            </Typography.P>
+          </AccordionContent>
+        </AccordionItem>
 
-        <div className="space-y-3">
-          <h2 className="text-4xl font-medium">Кем он был</h2>
-          <div className="text-base text-muted-foreground space-y-4">
-            <p>
-              По профессии FIRST_NAME был архитектором, и его работы до сих пор
-              украшают Брест. Главная площадь города, несколько школ, жилые
-              кварталы — всё это носит отпечаток его таланта. Он обожал своё
-              дело и часто говорил: "Архитектор не просто строит дома, он
-              создаёт места, где рождаются истории."
-            </p>
-            <p>
-              Но его жизнь — это не только чертежи и проекты. FIRST_NAME любил
-              проводить время с семьёй, играть в шахматы и читать исторические
-              романы. Его особенной страстью был сад — во дворе всегда цвели
-              розы, которые он ухаживал с особой любовью.
-            </p>
-          </div>
-        </div>
+        <AccordionItem 
+          value="hobbies" 
+          className={cn(
+            "border border-[#2D2D2D] rounded-lg px-6 py-4",
+            "data-[state=open]:border-white transition-colors duration-200"
+          )}
+        >
+          <AccordionTrigger className="hover:no-underline">
+            <Typography.H3 className="text-[20px] font-bold text-white text-left">
+              Увлечения
+            </Typography.H3>
+            <ChevronDown className="h-5 w-5 shrink-0 text-[#8B8B8B] transition-transform duration-200 [&[data-state=open]]:rotate-180" />
+          </AccordionTrigger>
+          <AccordionContent className="pt-4">
+            <Typography.P className="text-[16px] text-[#8B8B8B] leading-relaxed mt-0">
+              Александр был страстным любителем фотографии и часами мог находиться в темной комнате, проявляя снимки. Он увлекался путешествиями и за свою жизнь посетил более 30 стран. Особенно любил горные походы и альпинизм. В молодости занимался шахматами и даже участвовал в городских турнирах. Также увлекался чтением исторической литературы и коллекционированием монет.
+            </Typography.P>
+          </AccordionContent>
+        </AccordionItem>
 
-        <div className="space-y-3">
-          <h2 className="text-4xl font-medium">Каким он был</h2>
-          <p className="text-base text-muted-foreground">
-            Его знали как человека с добрым сердцем и невероятной щедростью. Он
-            всегда находил время для друзей, был душой компании и мастером
-            анекдотов.
-          </p>
-        </div>
-      </div>
+        <AccordionItem 
+          value="education" 
+          className={cn(
+            "border border-[#2D2D2D] rounded-lg px-6 py-4",
+            "data-[state=open]:border-white transition-colors duration-200"
+          )}
+        >
+          <AccordionTrigger className="hover:no-underline">
+            <Typography.H3 className="text-[20px] font-bold text-white text-left">
+              Образование
+            </Typography.H3>
+            <ChevronDown className="h-5 w-5 shrink-0 text-[#8B8B8B] transition-transform duration-200 [&[data-state=open]]:rotate-180" />
+          </AccordionTrigger>
+          <AccordionContent className="pt-4">
+            <Typography.P className="text-[16px] text-[#8B8B8B] leading-relaxed mt-0">
+              Александр окончил Брестский государственный технический университет по специальности "Инженерное дело" с красным дипломом в 1987 году. Во время учебы активно участвовал в студенческих научных конференциях и был председателем студенческого совета. После университета прошел несколько курсов повышения квалификации в области современных технологий. В 2010 году получил степень магистра делового администрирования в международной бизнес-школе.
+            </Typography.P>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 }
